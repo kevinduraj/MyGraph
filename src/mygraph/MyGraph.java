@@ -125,46 +125,62 @@ public class MyGraph {
     }
 
     private static JFreeChart createChart() {
-        JFreeChart jfreechart = ChartFactory.createStackedBarChart("Post Type Mix Over Time"
-                , "", "# of Posts by Type"
+        
+        JFreeChart jfreechart = ChartFactory.createStackedBarChart(
+                "Statistical Quality Control"
+                , "Time Period"
+                , "Product Types"
                 , createDataset1()
-                , PlotOrientation.VERTICAL, false, true, false);
+                , PlotOrientation.VERTICAL
+                , false, true, false);
         
         jfreechart.setBackgroundPaint(Color.white);
+        
         CategoryPlot categoryplot = (CategoryPlot) jfreechart.getPlot();
         categoryplot.setBackgroundPaint(new Color(238, 238, 255));
         CategoryDataset categorydataset = createDataset2();
         categoryplot.setDataset(1, categorydataset);
         categoryplot.mapDatasetToRangeAxis(1, 1);
+        
         CategoryAxis categoryaxis = categoryplot.getDomainAxis();
         categoryaxis.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
+        
+        /* 
+        http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/renderer/category/StackedBarRenderer.html        
+        */
         StackedBarRenderer stackedbarrenderer = (StackedBarRenderer) categoryplot.getRenderer();
         stackedbarrenderer.setDrawBarOutline(false);
-        stackedbarrenderer.setItemLabelsVisible(true);
+        
+        stackedbarrenderer.setBaseItemLabelsVisible(true);        
         stackedbarrenderer.setSeriesItemLabelGenerator(0, new StandardCategoryItemLabelGenerator());
         stackedbarrenderer.setSeriesItemLabelGenerator(1, new StandardCategoryItemLabelGenerator());
         stackedbarrenderer.setSeriesItemLabelGenerator(2, new StandardCategoryItemLabelGenerator());
         stackedbarrenderer.setSeriesItemLabelGenerator(3, new StandardCategoryItemLabelGenerator());
         
-        NumberAxis numberaxis = new NumberAxis("Likes+Shares+Comments");
+        NumberAxis numberaxis = new NumberAxis(" ");
         categoryplot.setRangeAxis(1, numberaxis);
         LineAndShapeRenderer lineandshaperenderer = new LineAndShapeRenderer();
         lineandshaperenderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator());
         categoryplot.setRenderer(1, lineandshaperenderer);
         categoryplot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD);
+        
         LegendTitle legendtitle = new LegendTitle(categoryplot.getRenderer(0));
         legendtitle.setMargin(new RectangleInsets(2D, 2D, 2D, 2D));
         legendtitle.setFrame(new BlockBorder());
+        
         LegendTitle legendtitle1 = new LegendTitle(categoryplot.getRenderer(1));
         legendtitle1.setMargin(new RectangleInsets(2D, 2D, 2D, 2D));
         legendtitle1.setFrame(new BlockBorder());
+        
         BlockContainer blockcontainer = new BlockContainer(new BorderArrangement());
         blockcontainer.add(legendtitle, RectangleEdge.LEFT);
         blockcontainer.add(legendtitle1, RectangleEdge.RIGHT);
         blockcontainer.add(new EmptyBlock(2000D, 0.0D));
+        
         CompositeTitle compositetitle = new CompositeTitle(blockcontainer);
         compositetitle.setPosition(RectangleEdge.BOTTOM);
         jfreechart.addSubtitle(compositetitle);
+        
         return jfreechart;
     }
 
@@ -181,8 +197,8 @@ public class MyGraph {
             document.open();
 
             //add image
-            int width = 500;
-            int height = 500;
+            int width = 550;
+            int height = 700;
             JFreeChart chart = createChart();
             BufferedImage bufferedImage = chart.createBufferedImage(width, height);
             Image image = Image.getInstance(writer, bufferedImage, 1.0f);
@@ -216,5 +232,6 @@ public class MyGraph {
 
     public static void main(String[] args) throws FileNotFoundException, DocumentException, IOException {
         (new MyGraph()).create(new FileOutputStream(new File("C://MyGraph.pdf")));
+        System.out.println("MyChart Finish ...");
     }
 }

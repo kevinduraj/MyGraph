@@ -40,61 +40,59 @@ import com.lowagie.text.pdf.PdfWriter;
 public class MyGraph {
 
     private static CategoryDataset createDataset1() {
-        
-        // Rows
-        String series1 = "Part1";
-        String series2 = "Part2";
-        String series3 = "Part3";
-        String series4 = "Part4";
 
-        // Columns
-        String category1 = "9/12/13";
-        String category2 = "16/12/13";
-        String category3 = "23/12/13";
-        String category4 = "30/12/13";
-        String category5 = "3/1/14";
-        String category6 = "6/1/14";
-        String category7 = "13/1/14";
-        String category8 = "20/1/14";
+        String row1 = "Part1";
+        String row2 = "Part2";
+        String row3 = "Part3";
+        String row4 = "Part4";
+
+        String col1 = "9/12/13";
+        String col2 = "16/12/13";
+        String col3 = "23/12/13";
+        String col4 = "30/12/13";
+        String col5 = "3/1/14";
+        String col6 = "6/1/14";
+        String col7 = "13/1/14";
+        String col8 = "20/1/14";
 
         // dataset
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        dataset.addValue(474, series1, category1);
-        dataset.addValue(828, series1, category2);
-        dataset.addValue(798, series1, category3);
-        dataset.addValue(450, series1, category4);
-        dataset.addValue(103, series1, category5);
-        dataset.addValue(204, series1, category6);
-        dataset.addValue(689, series1, category7);
-        dataset.addValue(246, series1, category8);
-        
-        dataset.addValue(578, series2, category1);
-        dataset.addValue(880, series2, category2);
-        dataset.addValue(553, series2, category3);
-        dataset.addValue(353, series2, category4);
-        dataset.addValue(356, series2, category5);
-        dataset.addValue(335, series2, category6);
-        dataset.addValue(430, series2, category7);
-        dataset.addValue(272, series2, category8);
-        
-        dataset.addValue(556, series3, category1);
-        dataset.addValue(398, series3, category2);
-        dataset.addValue(391, series3, category3);
-        dataset.addValue(198, series3, category4);
-        dataset.addValue(788, series3, category5);
-        dataset.addValue(345, series3, category6);
-        dataset.addValue(232, series3, category7);
-        dataset.addValue(491, series3, category8);
-        
-        dataset.addValue(809, series4, category1);
-        dataset.addValue(315, series4, category2);
-        dataset.addValue(211, series4, category3);
-        dataset.addValue(383, series4, category4);
-        dataset.addValue(333, series4, category5);
-        dataset.addValue(108, series4, category6);
-        dataset.addValue(172, series4, category7);
-        dataset.addValue(673, series4, category8);
+        dataset.addValue(474, row1, col1);
+        dataset.addValue(828, row1, col2);
+        dataset.addValue(798, row1, col3);
+        dataset.addValue(450, row1, col4);
+        dataset.addValue(103, row1, col5);
+        dataset.addValue(204, row1, col6);
+        dataset.addValue(689, row1, col7);
+        dataset.addValue(246, row1, col8);
+
+        dataset.addValue(578, row2, col1);
+        dataset.addValue(880, row2, col2);
+        dataset.addValue(553, row2, col3);
+        dataset.addValue(353, row2, col4);
+        dataset.addValue(356, row2, col5);
+        dataset.addValue(335, row2, col6);
+        dataset.addValue(430, row2, col7);
+        dataset.addValue(272, row2, col8);
+
+        dataset.addValue(556, row3, col1);
+        dataset.addValue(398, row3, col2);
+        dataset.addValue(391, row3, col3);
+        dataset.addValue(198, row3, col4);
+        dataset.addValue(788, row3, col5);
+        dataset.addValue(345, row3, col6);
+        dataset.addValue(232, row3, col7);
+        dataset.addValue(491, row3, col8);
+
+        dataset.addValue(809, row4, col1);
+        dataset.addValue(315, row4, col2);
+        dataset.addValue(211, row4, col3);
+        dataset.addValue(383, row4, col4);
+        dataset.addValue(333, row4, col5);
+        dataset.addValue(108, row4, col6);
+        dataset.addValue(172, row4, col7);
+        dataset.addValue(673, row4, col8);
 
         return dataset;
 
@@ -111,7 +109,7 @@ public class MyGraph {
         String s6 = "6/1/14";
         String s7 = "13/1/14";
         String s8 = "20/1/14";
-                       
+
         DefaultCategoryDataset defaultcategorydataset = new DefaultCategoryDataset();
         defaultcategorydataset.addValue(15D, s, s1);
         defaultcategorydataset.addValue(24D, s, s2);
@@ -125,62 +123,57 @@ public class MyGraph {
     }
 
     private static JFreeChart createChart() {
-        
+
         JFreeChart jfreechart = ChartFactory.createStackedBarChart(
-                "Statistical Quality Control"
-                , "Time Period"
-                , "Product Types"
-                , createDataset1()
-                , PlotOrientation.VERTICAL
-                , false, true, false);
-        
+                "Statistical Quality Control", "Time Period", "Product Types", createDataset1(), PlotOrientation.VERTICAL, false, true, false);
+
         jfreechart.setBackgroundPaint(Color.white);
-        
+
         CategoryPlot categoryplot = (CategoryPlot) jfreechart.getPlot();
         categoryplot.setBackgroundPaint(new Color(238, 238, 255));
         CategoryDataset categorydataset = createDataset2();
         categoryplot.setDataset(1, categorydataset);
         categoryplot.mapDatasetToRangeAxis(1, 1);
-        
+
         CategoryAxis categoryaxis = categoryplot.getDomainAxis();
         categoryaxis.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
-        
+
         /* 
-        http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/renderer/category/StackedBarRenderer.html        
-        */
-        StackedBarRenderer stackedbarrenderer = (StackedBarRenderer) categoryplot.getRenderer();
-        stackedbarrenderer.setDrawBarOutline(false);
+         http://www.jfree.org/jfreechart/api/javadoc/org/jfree/chart/renderer/category/StackedBarRenderer.html        
+         */
+        StackedBarRenderer label = (StackedBarRenderer) categoryplot.getRenderer();
+        label.setDrawBarOutline(false);
+        label.setBaseItemLabelsVisible(true);
+        label.setSeriesItemLabelGenerator(0, new StandardCategoryItemLabelGenerator());
+        label.setSeriesItemLabelGenerator(1, new StandardCategoryItemLabelGenerator());
+        label.setSeriesItemLabelGenerator(2, new StandardCategoryItemLabelGenerator());
+        label.setSeriesItemLabelGenerator(3, new StandardCategoryItemLabelGenerator());
+
+        NumberAxis axis = new NumberAxis(" ");
+        categoryplot.setRangeAxis(1, axis);
         
-        stackedbarrenderer.setBaseItemLabelsVisible(true);        
-        stackedbarrenderer.setSeriesItemLabelGenerator(0, new StandardCategoryItemLabelGenerator());
-        stackedbarrenderer.setSeriesItemLabelGenerator(1, new StandardCategoryItemLabelGenerator());
-        stackedbarrenderer.setSeriesItemLabelGenerator(2, new StandardCategoryItemLabelGenerator());
-        stackedbarrenderer.setSeriesItemLabelGenerator(3, new StandardCategoryItemLabelGenerator());
-        
-        NumberAxis numberaxis = new NumberAxis(" ");
-        categoryplot.setRangeAxis(1, numberaxis);
         LineAndShapeRenderer lineandshaperenderer = new LineAndShapeRenderer();
         lineandshaperenderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator());
         categoryplot.setRenderer(1, lineandshaperenderer);
         categoryplot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD);
-        
+
         LegendTitle legendtitle = new LegendTitle(categoryplot.getRenderer(0));
         legendtitle.setMargin(new RectangleInsets(2D, 2D, 2D, 2D));
         legendtitle.setFrame(new BlockBorder());
-        
+
         LegendTitle legendtitle1 = new LegendTitle(categoryplot.getRenderer(1));
         legendtitle1.setMargin(new RectangleInsets(2D, 2D, 2D, 2D));
         legendtitle1.setFrame(new BlockBorder());
-        
+
         BlockContainer blockcontainer = new BlockContainer(new BorderArrangement());
         blockcontainer.add(legendtitle, RectangleEdge.LEFT);
         blockcontainer.add(legendtitle1, RectangleEdge.RIGHT);
         blockcontainer.add(new EmptyBlock(2000D, 0.0D));
-        
+
         CompositeTitle compositetitle = new CompositeTitle(blockcontainer);
         compositetitle.setPosition(RectangleEdge.BOTTOM);
         jfreechart.addSubtitle(compositetitle);
-        
+
         return jfreechart;
     }
 
@@ -189,35 +182,32 @@ public class MyGraph {
         PdfWriter writer = null;
 
         try {
-            //instantiate document and writer
             document = new Document();
             writer = PdfWriter.getInstance(document, outputStream);
-
-            //open document
             document.open();
 
-            //add image
             int width = 550;
             int height = 700;
+            
             JFreeChart chart = createChart();
             BufferedImage bufferedImage = chart.createBufferedImage(width, height);
             Image image = Image.getInstance(writer, bufferedImage, 1.0f);
             document.add(image);
 
-            //release resources
             document.close();
             document = null;
 
             writer.close();
             writer = null;
+            
         } catch (DocumentException de) {
             throw de;
         } finally {
-            //release resources
             if (null != document) {
                 try {
                     document.close();
                 } catch (Exception ex) {
+                    System.out.println(ex);
                 }
             }
 
@@ -225,6 +215,7 @@ public class MyGraph {
                 try {
                     writer.close();
                 } catch (Exception ex) {
+                    System.out.println(ex);
                 }
             }
         }

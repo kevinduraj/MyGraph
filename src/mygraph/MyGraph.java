@@ -1,4 +1,3 @@
-/* lib: jfreechart-1.0.17.jar, jcommon-1.0.21.jar, itext-2.1.7 */
 package mygraph;
 
 import java.awt.Color;
@@ -125,7 +124,11 @@ public class MyGraph {
     private static JFreeChart createChart() {
 
         JFreeChart jfreechart = ChartFactory.createStackedBarChart(
-                "Statistical Quality Control", "Time Period", "Product Types", createDataset1(), PlotOrientation.VERTICAL, false, true, false);
+                "Statistical Quality Control"
+                , "Time Period Elapsed"
+                , "Product Types"
+                , createDataset1()
+                , PlotOrientation.VERTICAL, false, true, false);
 
         jfreechart.setBackgroundPaint(Color.white);
 
